@@ -29,4 +29,8 @@ df %>%
 
 # Part 2 ------------------------------------------------------------------
 
-
+df %>%
+  mutate(check_min = if_else(str_sub(pw, min_cnt, min_cnt) == letter, TRUE, FALSE),
+         check_max = if_else(str_sub(pw, max_cnt, max_cnt) == letter, TRUE, FALSE),
+         num_checks = if_else(check_min + check_max == 1, TRUE, FALSE)) %>%
+  summarize(answer = sum(num_checks))
